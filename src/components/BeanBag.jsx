@@ -1,7 +1,8 @@
+import { memo } from 'react';
 import { COLORS, BAG_RADIUS } from '../constants.js';
 import './BeanBag.css';
 
-export default function BeanBag({ bag }) {
+export default memo(function BeanBag({ bag }) {
   if (bag.state === 'carried' || bag.state === 'flying') return null;
 
   const bg = COLORS[bag.color];
@@ -19,4 +20,4 @@ export default function BeanBag({ bag }) {
       }}
     />
   );
-}
+})

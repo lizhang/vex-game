@@ -79,11 +79,11 @@
 
 ## 6. Polish
 
-- [ ] 6.1 Tune constants — robot speed, throw speed, friction, oscillation cycle, pickup range
-- [ ] 6.2 Add React.memo to BeanBag and other static components for render performance
-- [ ] 6.3 Center game on screen, prevent body scrolling
-- [ ] 6.4 Add controls guide panel (overlay or sidebar showing key bindings)
-- [ ] 6.5 Handle edge cases — all bags used up, bags landing exactly on boundaries
-- [ ] 6.6 Score popup animation polish — fade out, float distance
-- [ ] 6.7 Final verification against all 15 verification criteria in PLAN.md
-- [ ] 6.8 Commit: "Phase 6: Polish and tuning"
+- [x] 6.1 Tune constants — robot speed, throw speed, friction, oscillation cycle, pickup range
+- [x] 6.2 Add React.memo to BeanBag and other static components for render performance
+- [x] 6.3 Center game on screen, prevent body scrolling
+- [x] 6.4 Add controls guide panel (overlay or sidebar showing key bindings)
+- [x] 6.5 Handle edge cases — all bags used up, bags landing exactly on boundaries
+- [x] 6.6 Score popup animation polish — fade out, float distance
+- [x] 6.7 Final verification against all 15 verification criteria in PLAN.md
+- [x] 6.8 Commit: "Phase 6: Polish and tuning"

@@ -4,6 +4,11 @@
   box-sizing: border-box;
 }
 
+html, body {
+  overflow: hidden;
+  height: 100%;
+}
+
 body {
   font-family: system-ui, -apple-system, sans-serif;
   background: #1a1a2e;
@@ -12,4 +17,11 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+#root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 }
