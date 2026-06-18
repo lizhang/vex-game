@@ -1,9 +1,20 @@
 .robot {
   position: absolute;
-  background: #2c3e50;
   border: 2px solid #1a252f;
   border-radius: 4px;
   z-index: 5;
+}
+
+.robot--stunned {
+  animation: robot-shake 0.1s ease-in-out infinite alternate;
+}
+
+.robot-grey-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(128, 128, 128, 0.45);
+  border-radius: 2px;
+  z-index: 1;
 }
 
 .robot-direction {
@@ -21,4 +32,39 @@
   left: 50%;
   transform: translate(-50%, -50%);
   border: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.robot-stun-stars {
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 4px;
+  z-index: 10;
+}
+
+.stun-star {
+  font-size: 14px;
+  font-weight: bold;
+  color: #f1c40f;
+  animation: stun-orbit 0.6s ease-in-out infinite;
+}
+
+.stun-star:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.stun-star:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes robot-shake {
+  0% { transform: translateX(-2px); }
+  100% { transform: translateX(2px); }
+}
+
+@keyframes stun-orbit {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(-6px); opacity: 0.6; }
 }

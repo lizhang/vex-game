@@ -1,15 +1,17 @@
 import { useRef, useState, useCallback } from 'react';
-import { ROBOT_START_X, ROBOT_START_Y, MATCH_DURATION } from '../constants.js';
+import { ROBOT_START_RED, ROBOT_START_BLUE, MATCH_DURATION } from '../constants.js';
 import { initialBags } from '../game/fieldLayout.js';
 
-function createInitialState() {
+function createInitialState(myTeam) {
+  const start = myTeam === 'blue' ? ROBOT_START_BLUE : ROBOT_START_RED;
   return {
     robot: {
-      x: ROBOT_START_X,
-      y: ROBOT_START_Y,
-      direction: 'up',
+      x: start.x,
+      y: start.y,
+      direction: myTeam === 'blue' ? 'down' : 'up',
       carriedBag: null,
     },
+    otherRobot: null,
     bags: initialBags.map(b => ({
       ...b,
       state: 'field',
@@ -28,11 +30,13 @@ function createInitialState() {
     aimPowerDir: 1,
     phase: 'playing',
     scorePopups: [],
+    stunned: false,
+    stunnedUntil: 0,
   };
 }
 
-export default function useGameState() {
-  const stateRef = useRef(createInitialState());
+export default function useGameState(myTeam) {
+  const stateRef = useRef(createInitialState(myTeam));
   const [renderState, setRenderState] = useState(() => structuredClone(stateRef.current));
 
   const pushSnapshot = useCallback(() => {
@@ -40,9 +44,9 @@ export default function useGameState() {
   }, []);
 
   const reset = useCallback(() => {
-    stateRef.current = createInitialState();
+    stateRef.current = createInitialState(myTeam);
     pushSnapshot();
-  }, [pushSnapshot]);
+  }, [pushSnapshot, myTeam]);
 
   return { stateRef, renderState, pushSnapshot, reset };
 }
