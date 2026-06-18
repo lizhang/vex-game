@@ -3,24 +3,24 @@
 - [x] 0.1 Scaffold Vite+React project (`npm create vite@latest . -- --template react`)
 - [x] 0.2 Clean out Vite boilerplate (default App content, unnecessary assets)
 - [x] 0.3 Create directory structure (`src/components/`, `src/game/`, `src/hooks/`)
-- [ ] 0.4 Commit: "Phase 0: Project scaffolding"
+- [x] 0.4 Commit: "Phase 0: Project scaffolding"
 
 ## 1. Static Field Rendering
 
-- [ ] 1.1 Create `src/constants.js` with all game dimensions, speeds, colors, radii
-- [ ] 1.2 Create `src/game/fieldLayout.js` with positions of all goals, bars, bags, robot start
-- [ ] 1.3 Build `Field.jsx/.css` — 800x600 container with position:relative, grid lines, field background
-- [ ] 1.4 Build `PyramidGoal.jsx/.css` — nested corner-aligned squares (L1/L2/L3) with color prop
-- [ ] 1.5 Build `L4Goal.jsx/.css` — 50x50 purple/special square at center-field positions
-- [ ] 1.6 Build `YellowBar.jsx/.css` — thin vertical yellow line segments
-- [ ] 1.7 Build `FloorGoal.jsx/.css` — 50x300 colored rectangles on field edges
-- [ ] 1.8 Build `BeanBag.jsx/.css` — small colored element with position prop
-- [ ] 1.9 Build `Robot.jsx/.css` — 40x40 square with direction indicator
-- [ ] 1.10 Build `HUD.jsx/.css` — timer, score, carry indicator (placeholder values)
-- [ ] 1.11 Build `StartScreen.jsx/.css` — title + "Press Enter to Start"
-- [ ] 1.12 Build `GameScreen.jsx` — container that wires field and all game objects
-- [ ] 1.13 Build `App.jsx` screen state machine (start -> playing -> game-over) with placeholder transitions
-- [ ] 1.14 Verify: `npm run dev` shows visually complete field with all elements
+- [x] 1.1 Create `src/constants.js` with all game dimensions, speeds, colors, radii
+- [x] 1.2 Create `src/game/fieldLayout.js` with positions of all goals, bars, bags, robot start
+- [x] 1.3 Build `Field.jsx/.css` — 800x600 container with position:relative, grid lines, field background
+- [x] 1.4 Build `PyramidGoal.jsx/.css` — nested corner-aligned squares (L1/L2/L3) with color prop
+- [x] 1.5 Build `L4Goal.jsx/.css` — 50x50 purple/special square at center-field positions
+- [x] 1.6 Build `YellowBar.jsx/.css` — thin vertical yellow line segments
+- [x] 1.7 Build `FloorGoal.jsx/.css` — 50x300 colored rectangles on field edges
+- [x] 1.8 Build `BeanBag.jsx/.css` — small colored element with position prop
+- [x] 1.9 Build `Robot.jsx/.css` — 40x40 square with direction indicator
+- [x] 1.10 Build `HUD.jsx/.css` — timer, score, carry indicator (placeholder values)
+- [x] 1.11 Build `StartScreen.jsx/.css` — title + "Press Enter to Start"
+- [x] 1.12 Build `GameScreen.jsx` — container that wires field and all game objects
+- [x] 1.13 Build `App.jsx` screen state machine (start -> playing -> game-over) with placeholder transitions
+- [x] 1.14 Verify: `npm run dev` shows visually complete field with all elements
 - [ ] 1.15 Commit: "Phase 1: Static field rendering"
 
 ## 2. Robot Movement + Timer

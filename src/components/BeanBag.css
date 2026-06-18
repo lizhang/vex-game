@@ -1,0 +1,11 @@
+.bean-bag {
+  position: absolute;
+  border-radius: 3px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  z-index: 3;
+}
+
+.bean-bag.scored {
+  opacity: 0.5;
+  border-style: dashed;
+}
