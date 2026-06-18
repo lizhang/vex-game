@@ -21,7 +21,7 @@
 - [x] 1.12 Build `GameScreen.jsx` — container that wires field and all game objects
 - [x] 1.13 Build `App.jsx` screen state machine (start -> playing -> game-over) with placeholder transitions
 - [x] 1.14 Verify: `npm run dev` shows visually complete field with all elements
-- [ ] 1.15 Commit: "Phase 1: Static field rendering"
+- [x] 1.15 Commit: "Phase 1: Static field rendering"
 
 ## 2. Robot Movement + Timer
 
