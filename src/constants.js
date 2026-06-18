@@ -19,6 +19,11 @@ export const POWER_CYCLE_DURATION = 1.25;
 export const AIM_ROTATE_SPEED = 3;
 export const MAX_DELTA = 0.1;
 
+export const ROBOT_START_RED = { x: 25, y: 550 };
+export const ROBOT_START_BLUE = { x: 775, y: 75 };
+export const STUN_DURATION = 1000;
+export const MOVE_SEND_INTERVAL = 50;
+
 export const TIMER_WARNING_THRESHOLD = 10;
 
 export const COLORS = {
