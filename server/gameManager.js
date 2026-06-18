@@ -2,6 +2,7 @@ import { ROBOT_SIZE, PICKUP_RANGE, MATCH_DURATION } from '../src/constants.js';
 import { initialBags } from '../src/game/fieldLayout.js';
 import { updateProjectile } from '../src/game/physics.js';
 import { checkScoring } from '../src/game/scoring.js';
+import { saveGameResult } from './dynamodb.js';
 
 const STUN_DURATION = 1000;
 const ROBOT_START_RED = { x: 25, y: 550 };
@@ -103,6 +104,20 @@ export function createGameManager(roomManager) {
     room.playAgain = new Set();
 
     emitToRoom(io, room, 'game:over', {
+      score: state.score,
+      breakdown: state.breakdown,
+      endReason: reason,
+      duration: Math.round(elapsed),
+    });
+
+    const players = room.players.map((p) => p.name);
+    const teams = {};
+    room.players.forEach((p) => { teams[p.name] = p.team; });
+
+    saveGameResult({
+      roomId: room.id,
+      players,
+      teams,
       score: state.score,
       breakdown: state.breakdown,
       endReason: reason,
