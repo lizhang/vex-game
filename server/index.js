@@ -27,6 +27,8 @@ io.on('connection', (socket) => {
   });
 });
 
-httpServer.listen(PORT, () => {
-  console.log(`Game server listening on port ${PORT}`);
+const HOST = process.env.HOST || '0.0.0.0';
+
+httpServer.listen(PORT, HOST, () => {
+  console.log(`Game server listening on ${HOST}:${PORT}`);
 });
