@@ -11,19 +11,21 @@ export default function LobbyScreen({ socket, onJoined }) {
     if (!s) return;
 
     const handleRoomList = (list) => setRooms(list);
-    const handleJoined = ({ roomId }) => onJoined(roomId, playerName);
+    const handleJoined = ({ roomId, room, playerName: confirmedName }) => onJoined(roomId, confirmedName, room);
     const handleError = ({ message }) => setError(message);
 
     s.on('room:list', handleRoomList);
     s.on('room:joined', handleJoined);
     s.on('room:error', handleError);
 
+    s.emit('room:request-list');
+
     return () => {
       s.off('room:list', handleRoomList);
       s.off('room:joined', handleJoined);
       s.off('room:error', handleError);
     };
-  }, [socket, onJoined, playerName]);
+  }, [socket, onJoined]);
 
   function joinRoom(roomId) {
     if (!playerName.trim()) {

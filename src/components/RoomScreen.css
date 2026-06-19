@@ -25,19 +25,21 @@
   padding: 20px;
   border: 2px solid #ddd;
   border-radius: 8px;
-  min-width: 160px;
+  width: 240px;
   background: #fff;
-}
-
-.player-slot h3 {
-  margin-bottom: 0.5em;
-  color: #555;
 }
 
 .player-name {
   font-size: 1.2rem;
   font-weight: bold;
   margin-bottom: 1em;
+  color: #333;
+}
+
+.player-tag {
+  font-size: 0.8rem;
+  font-weight: normal;
+  color: #999;
 }
 
 .team-select {
@@ -61,23 +63,13 @@
   border-color: transparent;
 }
 
-.team-btn:hover:not(.selected) {
+.team-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.team-btn:hover:not(.selected):not(:disabled) {
   background: #e0e0e0;
-}
-
-.team-badge {
-  padding: 6px 16px;
-  border-radius: 4px;
-  font-weight: bold;
-  font-size: 0.9rem;
-  background: #eee;
-  color: #777;
-}
-
-.waiting-text {
-  font-style: italic;
-  color: #999;
-  margin-top: 1em;
 }
 
 .room-actions {

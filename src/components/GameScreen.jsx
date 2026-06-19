@@ -12,7 +12,7 @@ import useKeyboard from '../hooks/useKeyboard.js';
 import useGameLoop from '../hooks/useGameLoop.js';
 import useGameState from '../hooks/useGameState.js';
 import { updateRobotPosition } from '../game/physics.js';
-import { clampRobotToField, clampRobotToBars, findPickupBag } from '../game/collision.js';
+import { clampRobotToField, clampRobotToBars, clampRobotToPyramids, findPickupBag } from '../game/collision.js';
 import { pyramids, l4Goals, yellowBars, floorGoals } from '../game/fieldLayout.js';
 import {
   THROW_MAX_SPEED, THROW_MIN_SPEED, POWER_CYCLE_DURATION,
@@ -38,6 +38,7 @@ export default function GameScreen({ socket, myTeam, playerName }) {
         carriedBag: data.carriedBag,
         team: data.team || (myTeam === 'red' ? 'blue' : 'red'),
         stunned: data.stunned,
+        name: data.name || st.otherRobot?.name,
       };
     };
 
@@ -171,6 +172,7 @@ export default function GameScreen({ socket, myTeam, playerName }) {
         const prevX = s.robot.x;
         updateRobotPosition(s.robot, kd, delta);
         clampRobotToBars(s.robot, prevX);
+        clampRobotToPyramids(s.robot);
         clampRobotToField(s.robot);
 
         const now = Date.now();
@@ -227,6 +229,7 @@ export default function GameScreen({ socket, myTeam, playerName }) {
           team={myTeam}
           isLocal={true}
           stunned={renderState.stunned}
+          playerName={playerName}
         />
 
         {renderState.otherRobot && (
@@ -236,6 +239,7 @@ export default function GameScreen({ socket, myTeam, playerName }) {
             direction={renderState.otherRobot.direction}
             carriedBag={renderState.otherRobot.carriedBag ? renderState.bags.find(b => b.id === renderState.otherRobot.carriedBag)?.color : null}
             team={otherTeam}
+            playerName={renderState.otherRobot.name}
             isLocal={false}
             stunned={renderState.otherRobot.stunned}
           />

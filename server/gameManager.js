@@ -103,6 +103,7 @@ export function createGameManager(roomManager) {
     room.status = 'gameover';
     room.playAgain = new Set();
 
+    console.log(`Game over in room ${room.id}: reason=${reason}, score=${state.score}, players=${room.players.length}`);
     emitToRoom(io, room, 'game:over', {
       score: state.score,
       breakdown: state.breakdown,
@@ -156,10 +157,10 @@ export function createGameManager(roomManager) {
 
   function emitStateToRoom(io, room, state) {
     for (const p of room.players) {
-      const otherSocketId = room.players.find(
+      const otherPlayer = room.players.find(
         (op) => op.socketId !== p.socketId
-      )?.socketId;
-      const otherRobot = otherSocketId ? state.robots[otherSocketId] : null;
+      );
+      const otherRobot = otherPlayer ? state.robots[otherPlayer.socketId] : null;
 
       io.to(p.socketId).emit('state:update', {
         myRobot: state.robots[p.socketId],
@@ -171,6 +172,7 @@ export function createGameManager(roomManager) {
               carriedBag: otherRobot.carriedBag,
               team: otherRobot.team,
               stunned: Date.now() < otherRobot.stunnedUntil,
+              name: otherPlayer.name,
             }
           : null,
         bags: state.bags,
@@ -265,12 +267,16 @@ export function createGameManager(roomManager) {
         (p) => p.socketId !== socket.id
       );
       if (otherPlayer) {
+        const movingPlayer = result.room.players.find(
+          (p) => p.socketId === socket.id
+        );
         io.to(otherPlayer.socketId).emit('opponent:move', {
           x: robot.x,
           y: robot.y,
           direction: robot.direction,
           carriedBag: robot.carriedBag,
           stunned: isStunned(robot),
+          name: movingPlayer.name,
         });
       }
     });

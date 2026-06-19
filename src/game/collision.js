@@ -1,5 +1,5 @@
 import { ROBOT_SIZE, FIELD_WIDTH, FIELD_HEIGHT, PICKUP_RANGE } from '../constants.js';
-import { yellowBars } from './fieldLayout.js';
+import { yellowBars, pyramids } from './fieldLayout.js';
 
 const HALF = ROBOT_SIZE / 2;
 
@@ -28,6 +28,34 @@ export function clampRobotToBars(robot, prevX) {
     } else if (prevLeft >= bar.x && robotLeft < bar.x) {
       robot.x = bar.x + HALF;
     }
+  }
+}
+
+export function clampRobotToPyramids(robot) {
+  for (const pyr of pyramids) {
+    const rect = pyr.l1;
+    const robotLeft = robot.x - HALF;
+    const robotRight = robot.x + HALF;
+    const robotTop = robot.y - HALF;
+    const robotBottom = robot.y + HALF;
+
+    const rectRight = rect.x + rect.w;
+    const rectBottom = rect.y + rect.h;
+
+    if (robotRight <= rect.x || robotLeft >= rectRight ||
+        robotBottom <= rect.y || robotTop >= rectBottom) continue;
+
+    const pushRight = rectRight - robotLeft;
+    const pushLeft = robotRight - rect.x;
+    const pushDown = rectBottom - robotTop;
+    const pushUp = robotBottom - rect.y;
+
+    const minPush = Math.min(pushRight, pushLeft, pushDown, pushUp);
+
+    if (minPush === pushRight) robot.x += pushRight;
+    else if (minPush === pushLeft) robot.x -= pushLeft;
+    else if (minPush === pushDown) robot.y += pushDown;
+    else robot.y -= pushUp;
   }
 }
 

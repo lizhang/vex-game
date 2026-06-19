@@ -71,4 +71,4 @@
 - [x] 8.3 Test bump mechanic: drive robots into each other, verify pushback + stun + dizzy effect
 - [x] 8.4 Test game lifecycle: complete game, play again, leave room, verify room status transitions
 - [x] 8.5 Test disconnect handling: close one tab mid-game, verify game ends with abandoned, remaining player sees game over
-- [ ] 8.6 Commit: "Integration testing and polish for multiplayer game rooms"
+- [x] 8.6 Commit: "Integration testing and polish for multiplayer game rooms"

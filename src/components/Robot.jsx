@@ -1,7 +1,7 @@
 import { ROBOT_SIZE, COLORS } from '../constants.js';
 import './Robot.css';
 
-export default function Robot({ x, y, direction, carriedBag, team, isLocal = true, stunned = false }) {
+export default function Robot({ x, y, direction, carriedBag, team, isLocal = true, stunned = false, playerName }) {
   const dirIndicator = {
     up: { left: '35%', top: '2px', width: '30%', height: '8px' },
     down: { left: '35%', bottom: '2px', width: '30%', height: '8px' },
@@ -23,6 +23,7 @@ export default function Robot({ x, y, direction, carriedBag, team, isLocal = tru
         borderColor: team ? (team === 'red' ? '#c0392b' : '#2980b9') : '#1a252f',
       }}
     >
+      {playerName && <div className="robot-name-label">{playerName}</div>}
       {!isLocal && <div className="robot-grey-overlay" />}
       <div className="robot-direction" style={dirIndicator[direction] || dirIndicator.up} />
       {carriedBag && (

@@ -15,6 +15,7 @@ export default function App() {
   const [myTeam, setMyTeam] = useState(null);
   const [countdown, setCountdown] = useState(null);
   const [gameOverData, setGameOverData] = useState(null);
+  const [initialRoomData, setInitialRoomData] = useState(null);
 
   const goToLobby = useCallback(() => {
     setScreen('lobby');
@@ -22,11 +23,13 @@ export default function App() {
     setMyTeam(null);
     setCountdown(null);
     setGameOverData(null);
+    setInitialRoomData(null);
   }, []);
 
-  const handleJoined = useCallback((id, name) => {
+  const handleJoined = useCallback((id, name, roomData) => {
     setRoomId(id);
     setPlayerName(name);
+    setInitialRoomData(roomData);
     setScreen('room');
   }, []);
 
@@ -48,6 +51,7 @@ export default function App() {
     };
 
     const handleGameOver = (data) => {
+      console.log('game:over received', data);
       setGameOverData(data);
       setScreen('gameover');
     };
@@ -101,6 +105,7 @@ export default function App() {
           roomId={roomId}
           playerName={playerName}
           onLeave={goToLobby}
+          initialRoom={initialRoomData}
         />
       )}
 

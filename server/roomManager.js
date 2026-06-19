@@ -70,13 +70,15 @@ export function createRoomManager() {
     if (!result) return { success: false, reason: 'Not in a room' };
 
     const { room, player } = result;
-    if (team !== 'red' && team !== 'blue')
+    if (team !== 'red' && team !== 'blue' && team !== null)
       return { success: false, reason: 'Invalid team' };
 
-    const taken = room.players.some(
-      (p) => p.socketId !== socketId && p.team === team
-    );
-    if (taken) return { success: false, reason: 'Team already taken' };
+    if (team !== null) {
+      const taken = room.players.some(
+        (p) => p.socketId !== socketId && p.team === team
+      );
+      if (taken) return { success: false, reason: 'Team already taken' };
+    }
 
     player.team = team;
     return { success: true };
@@ -109,14 +111,36 @@ export function createRoomManager() {
   function handleConnection(io, socket, gameManager) {
     socket.emit('room:list', getRoomList());
 
+    socket.on('room:request-list', () => {
+      socket.emit('room:list', getRoomList());
+    });
+
     socket.on('room:join', ({ roomId, playerName }) => {
       const result = joinRoom(roomId, socket.id, playerName);
       if (result.success) {
         const room = getRoom(roomId);
-        socket.emit('room:joined', { roomId });
+        const roomData = {
+          id: room.id,
+          status: room.status,
+          playerCount: room.players.length,
+          players: room.players.map((p) => ({ name: p.name, team: p.team })),
+        };
+        socket.emit('room:joined', { roomId, room: roomData, playerName });
         broadcastRoomUpdate(io, room);
       } else {
         socket.emit('room:error', { message: result.reason });
+      }
+    });
+
+    socket.on('room:request-update', ({ roomId }) => {
+      const room = getRoom(roomId);
+      if (room) {
+        socket.emit('room:update', {
+          id: room.id,
+          status: room.status,
+          playerCount: room.players.length,
+          players: room.players.map((p) => ({ name: p.name, team: p.team })),
+        });
       }
     });
 
