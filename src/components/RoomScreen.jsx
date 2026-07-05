@@ -42,7 +42,7 @@ export default function RoomScreen({ socket, roomId, playerName, onLeave, initia
   console.log('RoomScreen', { playerName, roomPlayers: room.players });
   const myPlayer = room.players.find((p) => p.name === playerName);
   const otherPlayer = room.players.find((p) => p.name !== playerName);
-  const canStart = room.playerCount === 2 && room.players.every((p) => p.team);
+  const canStart = room.playerCount >= 1 && room.players.every((p) => p.team);
   const otherTeam = otherPlayer?.team;
   const redTaken = otherTeam === 'red';
   const blueTaken = otherTeam === 'blue';

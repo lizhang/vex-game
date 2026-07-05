@@ -86,7 +86,7 @@ export function createRoomManager() {
 
   function isRoomReady(room) {
     return (
-      room.players.length === 2 &&
+      room.players.length >= 1 &&
       room.players.every((p) => p.team !== null)
     );
   }

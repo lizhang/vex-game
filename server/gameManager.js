@@ -138,7 +138,7 @@ export function createGameManager(roomManager) {
     if (!room.playAgain) room.playAgain = new Set();
     room.playAgain.add(socket.id);
 
-    if (room.playAgain.size >= room.players.length && room.players.length === 2) {
+    if (room.playAgain.size >= room.players.length) {
       room.status = 'ready';
       room.playAgain = new Set();
       gameStates.delete(room.id);
@@ -239,7 +239,7 @@ export function createGameManager(roomManager) {
       const { room } = result;
 
       if (!roomMgr.isRoomReady(room)) return;
-      if (room.status !== 'ready') return;
+      if (room.status === 'countdown' || room.status === 'playing') return;
 
       startCountdown(io, room);
     });

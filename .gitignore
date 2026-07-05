@@ -1,6 +1,8 @@
 node_modules
 dist
-*.pem   
+*.pem
+.env
+.env.local
 # Terraform
 infra/.terraform/
 infra/*.tfstate
