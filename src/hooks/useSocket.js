@@ -6,7 +6,13 @@ export default function useSocket() {
   const [connected, setConnected] = useState(false);
 
   useEffect(() => {
-    const socket = io({ transports: ['websocket'] });
+    // In dev, connect directly to the game server and bypass Vite's
+    // WebSocket proxy (which logs spurious ECONNABORTED errors under
+    // StrictMode's double-mount). In prod, same-origin routes through
+    // CloudFront to the server.
+    const socket = io(import.meta.env.DEV ? 'http://localhost:3001' : undefined, {
+      transports: ['websocket'],
+    });
     socketRef.current = socket;
 
     socket.on('connect', () => setConnected(true));

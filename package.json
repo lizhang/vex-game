@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "server": "node --watch server/index.js",
     "dev:all": "concurrently \"npm run dev\" \"npm run server\"",
-    "deploy:static": "npm run build && aws s3 sync dist/ s3://$(cd infra && terraform output -raw s3_bucket_name) --delete"
+    "deploy:static": "node scripts/deploy-static.js"
   },
   "dependencies": {
     "react": "^19.1.0",
