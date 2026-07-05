@@ -42,4 +42,4 @@
 
 - [x] 7.1 Run `terraform init` and `terraform validate` to verify all configuration is syntactically correct
 - [x] 7.2 Run `terraform plan` to preview resources that would be created
-- [ ] 7.3 Commit: "Finalize deploy-infrastructure setup"
+- [x] 7.3 Commit: "Finalize deploy-infrastructure setup"

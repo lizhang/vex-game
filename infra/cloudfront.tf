@@ -12,7 +12,7 @@ resource "aws_cloudfront_distribution" "main" {
 
   # EC2 origin for WebSocket / Socket.IO
   origin {
-    domain_name = aws_eip.server.public_ip
+    domain_name = aws_eip.server.public_dns
     origin_id   = "ec2-server"
 
     custom_origin_config {
