@@ -1,5 +1,11 @@
 schema: spec-driven
 
+rules:
+  tasks:
+    - "End each main task group with a commit task, but only when that group produced committable changes (skip groups that are pure verification, investigation, or manual QA)."
+    - "Each commit task MUST create a commit whose subject follows Conventional Commits (feat, fix, chore, refactor, docs, test, etc.) with a short summary of that group's work."
+    - "Each commit body MUST include a trailer attributing it to the acting AI agent by name, formatted exactly as: Committed by AI agent: Claude Code (claude-opus-4-8)."
+
 # Project context (optional)
 # This is shown to AI when creating artifacts.
 # Add your tech stack, conventions, style guides, domain knowledge, etc.
